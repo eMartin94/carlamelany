@@ -1,27 +1,88 @@
 @import 'tailwindcss';
 
 :root {
-  :root {
-    --background: #ffffff;
-    --foreground: #171717;
-    --primary: #222222;
-    --secondary: #666666;
-    --alternative: #f5f5f5;
-    --accent: #2d5a4a;
-  }
+  --background: #ffffff;
+  --foreground: #222222;
+  --primary: #000000;
+  --secondary: #666666;
+  --alternative: #f5f5f5;
+  --accent: #78a083;
 }
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-alternative: var(--alternative);
-  --color-accent: #2d5a4a;
+  --color-accent: var(--accent);
 }
 
 body {
-  /* background: var(--background);
-  color: var(--foreground); */
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu-burger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.75em 2em 1.5em 2em;
+  background: rgba(255, 255, 255, 0);
+  outline: none;
+  border: none;
+  width: 28px;
+  height: 20px;
+  transition: all 250ms ease-out;
+  cursor: pointer;
+}
+.menu-burger:before,
+.menu-burger:after {
+  content: '';
+  width: 40px;
+  height: 2px;
+  position: absolute;
+  background-color: var(--color-alternative);
+  transition: all 250ms ease-out;
+  will-change: transform;
+}
+.menu-burger:before {
+  transform: translateY(-3px);
+}
+.menu-burger:after {
+  transform: translateY(3px);
+}
+.active.menu-burger:before {
+  transform: translateY(0) rotate(45deg);
+}
+.active.menu-burger:after {
+  transform: translateY(0) rotate(-45deg);
+}
+.overlay {
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+}
+
+.menu-item {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.menu-item p {
+  transition: letter-spacing 0.3s;
+}
+.menu-item p:hover {
+  transition: letter-spacing 0.3s;
+  letter-spacing: 0.075em;
+}
+.menu-item p#active::after {
+  content: '';
+  position: absolute;
+  top: 60%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: var(--color-accent);
+  width: 0%;
+  z-index: -1;
+  height: 12px;
+}
+
+@media (max-width: 900px) {
+  .logo a {
+    font-size: 20px;
+  }
 }

@@ -1,32 +1,55 @@
+'use client';
 import Link from 'next/link';
-import React from 'react';
+import { usePathname } from 'next/navigation';
+import React, { useRef, useState } from 'react';
+import gsap from 'gsap';
+import CSSRulePlugin from 'gsap/CSSRulePlugin';
+import MenuButton from '../MenuButton';
+import { MenuOverlay } from '../MenuOverlay';
+import { useMenuAnimation } from '@/hooks/useMenuAnimation';
+
+gsap.registerPlugin(CSSRulePlugin);
 
 export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const overlayRef = useRef(null);
+  const menuItemsRef = useRef([]);
+  const subNavRef = useRef(null);
+  const pathname = usePathname();
+
+  const { play, reverse } = useMenuAnimation(
+    menuItemsRef,
+    overlayRef,
+    subNavRef
+  );
+
+  const toggleMenu = () => {
+    isMenuOpen ? reverse() : play();
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    reverse();
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header className='absolute top-0 left-0 w-full h-16 z-50'>
-      <nav className='flex items-center justify-center h-full'>
-        <div className='flex items-center justify-between w-full h-full max-w-7xl px-4 py-2'>
-          <div className='text-lg font-bold'>carlamelany</div>
-          <ul className='flex space-x-4'>
-            <li>
-              <Link href='#projects' className='hover:underline'>
-                Project
-              </Link>
-            </li>
-            <li>
-              <Link href='#about' className='hover:underline'>
-                About
-              </Link>
-            </li>
-            <li>
-              <Link href='#contact' className='hover:underline'>
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
+    <header className='flex w-full justify-center items-center'>
+      <nav className='fixed top-0 w-full max-w-7xl flex items-center justify-between px-4 py-2 text-alternative mix-blend-difference z-10'>
+        <Link href={'/'} className='font-bold text-lg' onClick={closeMenu}>
+          carlamelany
+        </Link>
+        <MenuButton isActive={isMenuOpen} onClick={toggleMenu} />
       </nav>
-      <div></div>
+
+      <MenuOverlay
+        isMenuOpen={isMenuOpen}
+        overlayRef={overlayRef}
+        menuItemsRef={menuItemsRef}
+        subNavRef={subNavRef}
+        pathname={pathname}
+        onLinkClick={closeMenu}
+      />
     </header>
   );
 };
