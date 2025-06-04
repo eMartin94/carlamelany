@@ -1,6 +1,8 @@
 import { Space_Mono } from 'next/font/google';
 import '../styles/globals.css';
 import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
+import { ScrollToTopButton } from '@/components/ui/ScrollToTopButton';
 
 const spaceMono = Space_Mono({
   subsets: ['latin'],
@@ -21,6 +23,8 @@ export default function RootLayout({ children }) {
       <body className={`${spaceMono.className} antialiased`}>
         <Header />
         {children}
+        <ScrollToTopButton />
+        <Footer />
       </body>
     </html>
   );
