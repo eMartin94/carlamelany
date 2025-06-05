@@ -14,6 +14,7 @@
   --color-secondary: var(--secondary);
   --color-alternative: var(--alternative);
   --color-accent: var(--accent);
+  --background-image-hero: url('/img-hero.webp');
 }
 
 body {
@@ -79,10 +80,4 @@ body {
   width: 0%;
   z-index: -1;
   height: 12px;
-}
-
-@media (max-width: 900px) {
-  .logo a {
-    font-size: 20px;
-  }
 }

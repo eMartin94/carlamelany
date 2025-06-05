@@ -12,7 +12,7 @@ export const MenuOverlay = ({
   return (
     <div
       ref={overlayRef}
-      className='fixed top-0 left-0 w-full h-full flex bg-primary overlay will-change-transform'
+      className='fixed top-0 left-0 w-full h-full flex bg-primary overlay will-change-transform z-20'
     >
       <div className='fixed top-0 left-0 w-full h-full flex flex-col gap-4 justify-center items-center'>
         {navLinks.map((link, index) => (
