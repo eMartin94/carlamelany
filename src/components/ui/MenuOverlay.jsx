@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { navLinks, socialLinks } from '@/constants';
+import { useRouter } from 'next/navigation';
+import { useNavigation } from '@/hooks/useNavigation';
 
 export const MenuOverlay = ({
   overlayRef,
@@ -8,29 +10,44 @@ export const MenuOverlay = ({
   subNavRef,
   pathname,
   onLinkClick,
+  setIsOpen,
 }) => {
+  const { handleProjectClick } = useNavigation(setIsOpen);
+
   return (
     <div
       ref={overlayRef}
       className='fixed top-0 left-0 w-full h-full flex bg-primary overlay will-change-transform z-20'
     >
       <div className='fixed top-0 left-0 w-full h-full flex flex-col gap-4 justify-center items-center'>
-        {navLinks.map((link, index) => (
-          <div
-            key={link.name}
-            className='menu-item flex cursor-pointer text-alternative mix-blend-difference'
-          >
-            <p
-              id={link.path === pathname ? 'active' : ''}
-              className='relative text-center text-[8vw] leading-[110%] font-bold will-change-transform'
-              ref={(el) => (menuItemsRef.current[index] = el)}
+        {navLinks.map((link, index) => {
+          const isProjects =
+            link.path === '/projects' || link.path === '/#projects';
+          const isActive =
+            (isProjects && pathname === '/') || link.path === pathname;
+          return (
+            <div
+              key={link.name}
+              className='menu-item flex cursor-pointer text-alternative mix-blend-difference'
             >
-              <Link href={link.path} onClick={onLinkClick}>
-                {link.name}
-              </Link>
-            </p>
-          </div>
-        ))}
+              <p
+                id={isActive ? 'active' : ''}
+                className='relative text-center text-[8vw] leading-[110%] font-bold will-change-transform'
+                ref={(el) => (menuItemsRef.current[index] = el)}
+              >
+                {link.path === '/projects' || link.path === '/#projects' ? (
+                  <a href='/#projects' onClick={handleProjectClick}>
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link href={link.path} onClick={onLinkClick}>
+                    {link.name}
+                  </Link>
+                )}
+              </p>
+            </div>
+          );
+        })}
       </div>
 
       <div

@@ -7,7 +7,7 @@ import {
 export const navLinks = [
   {
     name: 'projects',
-    path: '/',
+    path: '/projects',
   },
   {
     name: 'about',

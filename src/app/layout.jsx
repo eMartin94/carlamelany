@@ -22,7 +22,9 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className={`${spaceMono.className} antialiased`}>
         <Header />
-        {children}
+        <main className='flex flex-col items-center justify-center w-full bg-white'>
+          {children}
+        </main>
         <ScrollToTopButton />
         <Footer />
       </body>

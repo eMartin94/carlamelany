@@ -69,6 +69,7 @@ export const Header = () => {
         subNavRef={subNavRef}
         pathname={pathname}
         onLinkClick={closeMenu}
+        setIsOpen={closeMenu}
       />
     </header>
   );

@@ -51,7 +51,10 @@ export const ProjectsSection = () => {
     });
   }, []);
   return (
-    <div className='w-full flex flex-col justify-center items-center mt-16'>
+    <div
+      className='w-full flex flex-col justify-center items-center pt-16'
+      id='projects'
+    >
       <div className='w-full max-w-7xl px-4 project-card' ref={projectsRef}>
         <h3 className='text-3xl sm:text-5xl lg:text-6xl font-black'>
           ¿Cómo diseño?
