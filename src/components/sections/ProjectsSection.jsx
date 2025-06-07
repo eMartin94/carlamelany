@@ -51,14 +51,9 @@ export const ProjectsSection = () => {
     });
   }, []);
   return (
-    <div
-      className='w-full flex flex-col justify-center items-center pt-16'
-      id='projects'
-    >
+    <section id='projects'>
       <div className='w-full max-w-7xl px-4 project-card' ref={projectsRef}>
-        <h3 className='text-3xl sm:text-5xl lg:text-6xl font-black'>
-          ¿Cómo diseño?
-        </h3>
+        <h3>¿Cómo diseño?</h3>
         <p className='mt-4'>
           Cada proyecto es una oportunidad para explorar la relación entre el
           espacio, la funcionalidad y la estética. Desde el primer boceto hasta
@@ -77,6 +72,6 @@ export const ProjectsSection = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };

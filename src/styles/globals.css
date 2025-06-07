@@ -17,6 +17,15 @@
   --background-image-hero: url('/img-hero.webp');
 }
 
+@layer {
+  h3 {
+    @apply text-3xl sm:text-5xl lg:text-6xl font-black;
+  }
+  section {
+    @apply w-full flex flex-col justify-center items-center pt-20;
+  }
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
