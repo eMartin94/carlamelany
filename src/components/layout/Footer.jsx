@@ -1,8 +1,12 @@
+'use client';
+
 import { navLinks, socialLinks } from '@/constants';
+import { useNavigation } from '@/hooks/useNavigation';
 import Link from 'next/link';
 import React from 'react';
 
 export const Footer = () => {
+  const { pathname, handleProjectClick } = useNavigation(() => false);
   return (
     <div className='w-full flex flex-col justify-center items-center mt-8 border-t-[1px] border-gray-300'>
       <div className='w-full flex flex-col items-center max-w-7xl justify-center pt-16 pb-20 px-4'>
@@ -20,16 +24,24 @@ export const Footer = () => {
             <div>
               <strong className='text-sm lg:text-base'>menú</strong>
               <div className='mt-4 flex flex-col gap-1'>
-                {navLinks.map((link) => (
-                  <React.Fragment key={link.name}>
-                    <Link
-                      href={link.path}
-                      className='text-primary text-xs lg:text-sm hover:text-secondary'
-                    >
-                      {link.name}
-                    </Link>
-                  </React.Fragment>
-                ))}
+                {navLinks.map((link) => {
+                  const isProjects =
+                    link.path === '/projects' || link.path === '/#projects';
+                  const isActive =
+                    (isProjects && pathname === '/') || link.path === pathname;
+                  return (
+                    <React.Fragment key={link.name}>
+                      {link.path === '/projects' ||
+                      link.path === '/#projects' ? (
+                        <a href='/#projects' onClick={handleProjectClick}>
+                          {link.name}
+                        </a>
+                      ) : (
+                        <Link href={link.path}>{link.name}</Link>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </div>
             </div>
             <div>

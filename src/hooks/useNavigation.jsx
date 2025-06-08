@@ -29,5 +29,5 @@ export const useNavigation = (setIsOpen) => {
       scrollToProjects();
     }
   };
-  return { handleProjectClick };
+  return { pathname, handleProjectClick };
 };

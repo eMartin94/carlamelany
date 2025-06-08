@@ -67,7 +67,12 @@ export const ProjectsSection = () => {
         <div className='columns-1 sm:columns-2 gap-4 w-full mt-8'>
           {Array.from({ length: 3 }, (_, i) => (
             <div key={i} ref={(el) => (projectCardRef.current[i] = el)}>
-              <ProjectCard />
+              <ProjectCard
+                imageSrc={'/img-hero.webp'}
+                href={'/project/1'}
+                title='nombre del proyecto más larguísimo'
+                tags={['tag1', 'tag2', 'tag3']}
+              />
             </div>
           ))}
         </div>

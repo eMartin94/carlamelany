@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import CSSRulePlugin from 'gsap/CSSRulePlugin';
@@ -16,7 +15,6 @@ export const Header = () => {
   const overlayRef = useRef(null);
   const menuItemsRef = useRef([]);
   const subNavRef = useRef(null);
-  const pathname = usePathname();
   const isScrolled = useScroll();
 
   const { play, reverse } = useMenuAnimation(
@@ -67,7 +65,6 @@ export const Header = () => {
         overlayRef={overlayRef}
         menuItemsRef={menuItemsRef}
         subNavRef={subNavRef}
-        pathname={pathname}
         onLinkClick={closeMenu}
         setIsOpen={closeMenu}
       />

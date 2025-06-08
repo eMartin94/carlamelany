@@ -1,18 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { navLinks, socialLinks } from '@/constants';
-import { useRouter } from 'next/navigation';
 import { useNavigation } from '@/hooks/useNavigation';
 
 export const MenuOverlay = ({
   overlayRef,
   menuItemsRef,
   subNavRef,
-  pathname,
   onLinkClick,
   setIsOpen,
 }) => {
-  const { handleProjectClick } = useNavigation(setIsOpen);
+  const { pathname, handleProjectClick } = useNavigation(setIsOpen);
 
   return (
     <div
