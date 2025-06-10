@@ -5,15 +5,24 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ProjectCard } from '../ui/ProjectCard';
+import ProjectNotFound from '@/app/[locale]/project/[id]/not-found';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const ProjectIdSection = ({ projectId }) => {
+export const ProjectIdSection = ({ projectData, projectId }) => {
   const imgRef = useRef(null);
   const titleRef = useRef(null);
   const detailsRef = useRef(null);
   const galleryRef = useRef([]);
   const commentsRef = useRef(null);
+
+  const projectFound = projectData.projectsList.find(
+    (project) => project.slug === projectId
+  );
+
+  if (!projectFound) {
+    return <ProjectNotFound />;
+  }
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -56,7 +65,7 @@ export const ProjectIdSection = ({ projectId }) => {
             duration: 1,
             scrollTrigger: {
               trigger: element,
-              start: 'top 90%',
+              start: 'top 95%',
               toggleActions: 'play none none reverse',
             },
           }
@@ -87,8 +96,8 @@ export const ProjectIdSection = ({ projectId }) => {
       <div className='w-full max-w-7xl flex flex-col justify-center px-4 gap-8'>
         <div className='w-full flex justify-center relative'>
           <Image
-            src={'/img-hero.webp'}
-            alt={'project.name'}
+            src={projectFound.cover}
+            alt={projectFound.name}
             width={1280}
             height={600}
             className='w-full max-w-[1280px] max-h-[480px] object-center object-cover block'
@@ -96,46 +105,39 @@ export const ProjectIdSection = ({ projectId }) => {
           />
         </div>
         <div
-          className='flex flex-col sm:flex-row justify-between gap-8'
+          className='flex flex-col sm:flex-row justify-between gap-8 mt-6'
           ref={titleRef}
         >
-          <h3>Casa Minimalista en Lima {projectId}</h3>
+          <h3>{projectFound.name}</h3>
           <div className='w-full' ref={detailsRef}>
-            <div className='w-full grid grid-cols-2 lg:grid-cols-[24%_40%_18%_18%] justify-between mb-6 gap-4'>
+            <div className='w-full grid grid-cols-2 lg:grid-cols-[28%_38%_14%_14%] justify-between mb-6 gap-4 lg:gap-2'>
               <div>
-                <p>Lugar</p>
-                <strong>Lima, Perú</strong>
+                <h5>{projectData.labelLocation}</h5>
+                <strong>{projectFound.location}sadsd</strong>
               </div>
               <div>
-                <p>Fase del proyecto</p>
-                <strong>Diseño Conceptual</strong>
+                <h5>{projectData.labelProjectPhase}</h5>
+                <strong>{projectFound.projectPhase}</strong>
               </div>
               <div>
-                <p>Año</p>
-                <strong>2023</strong>
+                <h5>{projectData.labelYear}</h5>
+                <strong>{projectFound.year}</strong>
               </div>
               <div>
-                <p>Área</p>
-                <strong>100 m²</strong>
+                <h5>{projectData.labelArea}</h5>
+                <strong>{projectFound.area}</strong>
               </div>
             </div>
-            <p>
-              Este proyecto presenta un diseño arquitectónico minimalista que
-              busca la armonía entre funcionalidad y estética. La vivienda se
-              caracteriza por sus líneas limpias, espacios abiertos y una paleta
-              de colores neutros que maximizan la iluminación natural. Se
-              priorizó el uso de materiales sostenibles y de bajo mantenimiento,
-              logrando un equilibrio perfecto entre modernidad y confort.
-            </p>
+            <p>{projectFound.description}</p>
           </div>
         </div>
 
         <div>
           <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 justify-between mt-8'>
-            {Array.from({ length: 5 }, (_, i) => (
+            {projectFound.images.map((image, i) => (
               <div key={i} ref={(el) => (galleryRef.current[i] = el)}>
                 <ProjectCard
-                  imageSrc={'/img-hero.webp'}
+                  imageSrc={image}
                   showInfo={false}
                   hoverZoom={false}
                 />
@@ -145,9 +147,7 @@ export const ProjectIdSection = ({ projectId }) => {
         </div>
 
         <div className='w-full pt-8' ref={commentsRef}>
-          <p className='text-center text-xl'>
-            Estaré encantada de ayudarle con su proyecto.
-          </p>
+          <p className='text-center text-xl'>{projectData.comment}</p>
           <p className='text-center mt-8'>
             +51 987 654 321
             <span> / </span>

@@ -1,5 +1,5 @@
 import { NotFoundSection } from '@/components/sections/NotFoundSection';
 
-export default function NotFound() {
+export default async function NotFound() {
   return <NotFoundSection />;
 }

@@ -1,8 +1,9 @@
 import { Space_Mono } from 'next/font/google';
-import '../styles/globals.css';
+import '@/styles/globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollToTopButton } from '@/components/ui/ScrollToTopButton';
+import { getDictionary } from '@/libs/dictionaries';
 
 const spaceMono = Space_Mono({
   subsets: ['latin'],
@@ -17,16 +18,27 @@ export const metadata = {
     'Carla Melany is an architect with a passion for sustainable design and innovative solutions. Explore her portfolio showcasing her architectural projects and designs.',
 };
 
-export default function RootLayout({ children }) {
+export async function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'es' }];
+}
+
+export default async function RootLayout({ children, params }) {
+  const { locale } = await params;
+  const dict = await getDictionary(locale);
+
   return (
-    <html lang='en'>
+    <html lang={locale}>
       <body className={`${spaceMono.className} antialiased`}>
-        <Header />
+        <Header headerData={dict.navLinks} currentLocale={locale} />
         <main className='flex flex-col items-center justify-center w-full bg-white'>
           {children}
         </main>
         <ScrollToTopButton />
-        <Footer />
+        <Footer
+          footerData={dict.footerData}
+          navLinks={dict.navLinks}
+          currentLocale={locale}
+        />
       </body>
     </html>
   );

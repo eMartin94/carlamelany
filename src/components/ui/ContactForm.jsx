@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-export const ContactForm = () => {
+export const ContactForm = ({ contactData }) => {
   const titleFormRef = useRef(null);
   const inputRef = useRef(null);
   const textAreaRef = useRef(null);
@@ -61,10 +61,8 @@ export const ContactForm = () => {
   return (
     <>
       <div className='w-full' ref={titleFormRef}>
-        <h5 className='text-4xl text-center mb-4'>
-          ¿Tienes un proyecto en mente?
-        </h5>
-        <p className='text-center'>No dudes en escribirme</p>
+        <h5 className='text-4xl text-center mb-4'>{contactData.subtitle}</h5>
+        <p className='text-center'>{contactData.comment}</p>
       </div>
       <form className='flex flex-col gap-4 mt-8'>
         <div
@@ -75,28 +73,28 @@ export const ContactForm = () => {
             <div className='w-full sm:w-80 h-14 border-[1px] border-gray-300 flex items-center p-2'>
               <input
                 type='text'
-                placeholder='Nombre'
+                placeholder={contactData.inputName}
                 className='w-full h-full outline-none'
               />
             </div>
             <div className='w-full sm:w-80 h-14 border-[1px] border-gray-300 flex items-center p-2'>
               <input
                 type='email'
-                placeholder='Correo electrónico'
+                placeholder={contactData.inputEmail}
                 className='w-full h-full outline-none'
               />
             </div>
             <div className='w-full sm:w-80 h-14 border-[1px] border-gray-300 flex items-center p-2'>
               <input
                 type='text'
-                placeholder='Teléfono'
+                placeholder={contactData.inputPhone}
                 className='w-full h-full outline-none'
               />
             </div>
           </div>
           <div className='w-full min-h-[200px] border-[1px] border-gray-300 flex items-start p-2'>
             <textarea
-              placeholder='Escribe tu mensaje aquí...'
+              placeholder={contactData.inputMessage}
               className='w-full h-full resize-none outline-none'
             />
           </div>
@@ -106,7 +104,7 @@ export const ContactForm = () => {
             type='submit'
             className='w-full sm:w-80 h-14 bg-primary text-white uppercase hover:bg-secondary font-bold cursor-pointer'
           >
-            Enviar
+            {contactData.buttonText}
           </button>
         </div>
       </form>

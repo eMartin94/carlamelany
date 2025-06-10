@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import { ContactForm } from '../ui/ContactForm';
 import gsap from 'gsap';
 
-export const ContacSection = () => {
+export const ContacSection = ({ contactData }) => {
   const contacRef = useRef(null);
 
   useEffect(() => {
@@ -33,20 +33,15 @@ export const ContacSection = () => {
     <section>
       <div className='flex flex-col gap-4 px-4 w-full max-w-7xl'>
         <div className='mb-10' ref={contacRef}>
-          <h3>Contacto</h3>
-          <p className='mt-4'>
-            Si tienes alguna pregunta, quieres colaborar en un proyecto o
-            simplemente conversar sobre arquitectura, estaré encantada de
-            escucharte. No dudes en ponerte en contacto conmigo a través de los
-            siguientes medios.
-          </p>
+          <h3>{contactData.titlePage}</h3>
+          <p className='mt-4'>{contactData.descriptionPage}</p>
           <div className='mt-4'>
             <p className='text-sm text-primary'>+51 987 654 321</p>
             <p className='text-sm text-primary'>carlamelany@gmail.com</p>
           </div>
         </div>
 
-        <ContactForm />
+        <ContactForm contactData={contactData} />
       </div>
     </section>
   );

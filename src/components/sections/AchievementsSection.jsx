@@ -6,9 +6,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const AchievementsSection = () => {
+export const AchievementsSection = ({ achievementsData }) => {
   const titleRef = useRef(null);
   const achievementsRef = useRef([]);
+  const achievementSort = [...achievementsData.achievementsList]
+    .sort((a, b) => a.date - b.date)
+    .reverse();
 
   useEffect(() => {
     const title = titleRef.current;
@@ -53,10 +56,10 @@ export const AchievementsSection = () => {
     <section>
       <div className='w-full max-w-7xl flex flex-col gap-4 px-4'>
         <h3 className='text-center' ref={titleRef}>
-          Estudios y logros
+          {achievementsData.titlePage}
         </h3>
         <div className='w-full mt-8'>
-          {Array.from({ length: 10 }, (_, i) => (
+          {achievementSort.map((achievement, i) => (
             <div
               key={i}
               className='flex flex-col sm:flex-row w-full pb-2 mb-4 border-b-2 border-gray-100 px-0'
@@ -64,14 +67,14 @@ export const AchievementsSection = () => {
             >
               <div className='text-left sm:text-right w-full sm:w-1/2 block'>
                 <strong className='mr-2 block sm:inline float-left sm:float-none w-[44px] sm:w-auto'>
-                  2025
+                  {achievement.date}
                 </strong>
                 <span className='block sm:inline float-left sm:float-none w-[calc(100%-52px)] sm:w-auto'>
-                  Cursando el último año de la carrera de Arquitectura
+                  {achievement.description}
                 </span>
               </div>
               <div className='w-full sm:w-1/2 pl-[52px]  font-bold pt-2 sm:pt-0'>
-                Universidad Ricardo Palma
+                {achievement.educationCenter}
               </div>
             </div>
           ))}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { navLinks, socialLinks } from '@/constants';
+import { socialLinks } from '@/constants';
 import { useNavigation } from '@/hooks/useNavigation';
 
 export const MenuOverlay = ({
@@ -9,8 +9,12 @@ export const MenuOverlay = ({
   subNavRef,
   onLinkClick,
   setIsOpen,
+  navLinks,
+  locale,
 }) => {
   const { pathname, handleProjectClick } = useNavigation(setIsOpen);
+
+  console.log('ver pathname: ', pathname);
 
   return (
     <div
@@ -20,7 +24,8 @@ export const MenuOverlay = ({
       <div className='fixed top-0 left-0 w-full h-full flex flex-col gap-4 justify-center items-center'>
         {navLinks.map((link, index) => {
           const isProjects =
-            link.path === '/projects' || link.path === '/#projects';
+            link.path === `/${locale}/projects` ||
+            link.path === `/${locale}/#projects`;
           const isActive =
             (isProjects && pathname === '/') || link.path === pathname;
           return (
@@ -33,8 +38,9 @@ export const MenuOverlay = ({
                 className='relative text-center text-[8vw] leading-[110%] font-bold will-change-transform'
                 ref={(el) => (menuItemsRef.current[index] = el)}
               >
-                {link.path === '/projects' || link.path === '/#projects' ? (
-                  <a href='/#projects' onClick={handleProjectClick}>
+                {link.path === `/${locale}/projects` ||
+                link.path === `/${locale}/#projects` ? (
+                  <a href={`/${locale}/#projects`} onClick={handleProjectClick}>
                     {link.name}
                   </a>
                 ) : (

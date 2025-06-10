@@ -1,43 +1,54 @@
 'use client';
 
-import { navLinks, socialLinks } from '@/constants';
+import { socialLinks } from '@/constants';
 import { useNavigation } from '@/hooks/useNavigation';
 import Link from 'next/link';
 import React from 'react';
 
-export const Footer = () => {
+export const Footer = ({ footerData, navLinks, currentLocale }) => {
   const { pathname, handleProjectClick } = useNavigation(() => false);
   return (
     <div className='w-full flex flex-col justify-center items-center mt-8 border-t-[1px] border-gray-300'>
       <div className='w-full flex flex-col items-center max-w-7xl justify-center pt-16 pb-20 px-4'>
-        <div className='flex flex-col sm:flex-row justify-between'>
+        <div className='w-full flex flex-col sm:flex-row justify-between'>
           <div className='flex flex-col gap-4 w-full sm:w-1/2 mb-8 sm:mb-0'>
             <Link href='/' className='font-bold text-2xl'>
               carlamelany
             </Link>
             <p className='w-full sm:w-3/5 text-xs lg:text-sm'>
-              Diseñando espacios con creatividad y propósito, desde el primer
-              boceto hasta la realidad.
+              {footerData.descriptionPage}
             </p>
           </div>
           <div className='flex flex-col sm:flex-row justify-between w-1/2 gap-6'>
             <div>
-              <strong className='text-sm lg:text-base'>menú</strong>
+              <strong className='text-sm lg:text-base'>
+                {footerData.menuTitle}
+              </strong>
               <div className='mt-4 flex flex-col gap-1'>
                 {navLinks.map((link) => {
                   const isProjects =
-                    link.path === '/projects' || link.path === '/#projects';
+                    link.path === `/${currentLocale}/projects` ||
+                    link.path === `/${currentLocale}/#projects`;
                   const isActive =
                     (isProjects && pathname === '/') || link.path === pathname;
                   return (
                     <React.Fragment key={link.name}>
-                      {link.path === '/projects' ||
-                      link.path === '/#projects' ? (
-                        <a href='/#projects' onClick={handleProjectClick}>
+                      {link.path === `/${currentLocale}/projects` ||
+                      link.path === `/${currentLocale}/#projects` ? (
+                        <a
+                          href={`/${currentLocale}/#projects`}
+                          className='text-xs lg:text-sm text-primary hover:text-secondary'
+                          onClick={handleProjectClick}
+                        >
                           {link.name}
                         </a>
                       ) : (
-                        <Link href={link.path}>{link.name}</Link>
+                        <Link
+                          href={link.path}
+                          className='text-xs lg:text-sm text-primary hover:text-secondary'
+                        >
+                          {link.name}
+                        </Link>
                       )}
                     </React.Fragment>
                   );
@@ -45,7 +56,9 @@ export const Footer = () => {
               </div>
             </div>
             <div>
-              <strong className='text-sm lg:text-base'>contáctame</strong>
+              <strong className='text-sm lg:text-base'>
+                {footerData.contacTitle}
+              </strong>
               <div className='flex flex-col gap-1 mt-4'>
                 <p className='text-xs lg:text-sm text-primary'>
                   +51 987 654 321
@@ -56,7 +69,9 @@ export const Footer = () => {
               </div>
             </div>
             <div>
-              <strong className='text-sm lg:text-base'>sígueme en:</strong>
+              <strong className='text-sm lg:text-base'>
+                {footerData.followTitle}
+              </strong>
               <div className='flex flex-col gap-1 mt-4'>
                 {socialLinks.map((link) => (
                   <React.Fragment key={link.name}>

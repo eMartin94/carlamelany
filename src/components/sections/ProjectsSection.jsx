@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const ProjectsSection = () => {
+export const ProjectsSection = ({ locale, projectData }) => {
   const projectsRef = useRef(null);
   const projectCardRef = useRef([]);
   useEffect(() => {
@@ -53,25 +53,17 @@ export const ProjectsSection = () => {
   return (
     <section id='projects'>
       <div className='w-full max-w-7xl px-4 project-card' ref={projectsRef}>
-        <h3>¿Cómo diseño?</h3>
-        <p className='mt-4'>
-          Cada proyecto es una oportunidad para explorar la relación entre el
-          espacio, la funcionalidad y la estética. Desde el primer boceto hasta
-          los detalles finales, mi proceso de diseño busca crear ambientes que
-          sean habitables, eficientes y visualmente impactantes. Con una visión
-          en constante evolución y un compromiso con el aprendizaje, cada
-          propuesta arquitectónica refleja creatividad, técnica y una profunda
-          atención al contexto y las necesidades del usuario.
-        </p>
+        <h3>{projectData.titlePage}</h3>
+        <p className='mt-4'>{projectData.descriptionPage}</p>
 
         <div className='columns-1 sm:columns-2 gap-4 w-full mt-8'>
-          {Array.from({ length: 3 }, (_, i) => (
+          {projectData.projectsList.map((project, i) => (
             <div key={i} ref={(el) => (projectCardRef.current[i] = el)}>
               <ProjectCard
-                imageSrc={'/img-hero.webp'}
-                href={'/project/1'}
-                title='nombre del proyecto más larguísimo'
-                tags={['tag1', 'tag2', 'tag3']}
+                imageSrc={project.cover}
+                href={`/${locale}/project/${project.slug}`}
+                title={project.name}
+                tags={project.tags}
               />
             </div>
           ))}

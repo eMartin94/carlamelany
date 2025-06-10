@@ -7,10 +7,11 @@ import MenuButton from '../ui/MenuButton';
 import { MenuOverlay } from '../ui/MenuOverlay';
 import { useMenuAnimation } from '@/hooks/useMenuAnimation';
 import { useScroll } from '@/hooks/useScroll';
+import { LanguageButton } from '../ui/LanguageButton';
 
 gsap.registerPlugin(CSSRulePlugin);
 
-export const Header = () => {
+export const Header = ({ currentLocale, headerData }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const overlayRef = useRef(null);
   const menuItemsRef = useRef([]);
@@ -54,8 +55,7 @@ export const Header = () => {
         </Link>
 
         <div className='flex gap-2'>
-          <button className='cursor-pointer'>ES</button>
-          <button className='cursor-pointer'>EN</button>
+          <LanguageButton locale={currentLocale} />
           <MenuButton isActive={isMenuOpen} onClick={toggleMenu} />
         </div>
       </nav>
@@ -67,6 +67,8 @@ export const Header = () => {
         subNavRef={subNavRef}
         onLinkClick={closeMenu}
         setIsOpen={closeMenu}
+        navLinks={headerData}
+        locale={currentLocale}
       />
     </header>
   );
