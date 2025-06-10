@@ -1,5 +1,5 @@
 export const navLinks = [
-  { name: 'Projectos', path: '/es/projects' },
+  { name: 'Proyectos', path: '/es/projects' },
   { name: 'Sobre mi', path: '/es/about' },
   { name: 'Contacto', path: '/es/contact' },
 ];

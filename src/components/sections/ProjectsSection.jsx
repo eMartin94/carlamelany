@@ -22,7 +22,7 @@ export const ProjectsSection = ({ locale, projectData }) => {
         stagger: 0.2,
         scrollTrigger: {
           trigger: elements,
-          start: 'top 80%',
+          start: 'top 90%',
           toggleActions: 'play none none reverse',
         },
       }
@@ -54,7 +54,7 @@ export const ProjectsSection = ({ locale, projectData }) => {
     <section id='projects'>
       <div className='w-full max-w-7xl px-4 project-card' ref={projectsRef}>
         <h3>{projectData.titlePage}</h3>
-        <p className='mt-4'>{projectData.descriptionPage}</p>
+        <p className='mt-8'>{projectData.descriptionPage}</p>
 
         <div className='columns-1 sm:columns-2 gap-4 w-full mt-8'>
           {projectData.projectsList.map((project, i) => (

@@ -102,7 +102,7 @@ export const ContactForm = ({ contactData }) => {
         <div className='w-full flex justify-end' ref={buttonRef}>
           <button
             type='submit'
-            className='w-full sm:w-80 h-14 bg-primary text-white uppercase hover:bg-secondary font-bold cursor-pointer'
+            className='w-full sm:w-80 h-14 bg-primary text-white uppercase hover:bg-accent font-bold cursor-pointer transition-all duration-300 ease-linear'
           >
             {contactData.buttonText}
           </button>

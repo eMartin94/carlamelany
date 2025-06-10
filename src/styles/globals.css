@@ -6,7 +6,7 @@
   --primary: #000000;
   --secondary: #666666;
   --alternative: #f5f5f5;
-  --accent: #78a083;
+  --accent: rgb(120, 160, 131);
 }
 
 @theme {
@@ -19,7 +19,7 @@
 
 @layer {
   h3 {
-    @apply text-3xl sm:text-5xl lg:text-6xl font-black;
+    @apply text-3xl sm:text-5xl lg:text-6xl font-black leading-tight;
   }
   section {
     @apply w-full flex flex-col justify-center items-center pt-20;
@@ -88,5 +88,5 @@ body {
   background-color: var(--color-accent);
   width: 0%;
   z-index: -1;
-  height: 12px;
+  height: 20%;
 }

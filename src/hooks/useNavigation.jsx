@@ -5,8 +5,6 @@ export const useNavigation = (setIsOpen) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  console.log('useNavigation: ', pathname);
-
   useEffect(() => {
     if (pathname === '/projects') {
       router.replace('/');

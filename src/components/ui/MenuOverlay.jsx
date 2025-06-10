@@ -14,8 +14,6 @@ export const MenuOverlay = ({
 }) => {
   const { pathname, handleProjectClick } = useNavigation(setIsOpen);
 
-  console.log('ver pathname: ', pathname);
-
   return (
     <div
       ref={overlayRef}
@@ -27,7 +25,7 @@ export const MenuOverlay = ({
             link.path === `/${locale}/projects` ||
             link.path === `/${locale}/#projects`;
           const isActive =
-            (isProjects && pathname === '/') || link.path === pathname;
+            (isProjects && pathname === `/${locale}`) || link.path === pathname;
           return (
             <div
               key={link.name}

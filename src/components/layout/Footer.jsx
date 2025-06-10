@@ -2,6 +2,7 @@
 
 import { socialLinks } from '@/constants';
 import { useNavigation } from '@/hooks/useNavigation';
+import { currentYear } from '@/libs/date';
 import Link from 'next/link';
 import React from 'react';
 
@@ -37,7 +38,7 @@ export const Footer = ({ footerData, navLinks, currentLocale }) => {
                       link.path === `/${currentLocale}/#projects` ? (
                         <a
                           href={`/${currentLocale}/#projects`}
-                          className='text-xs lg:text-sm text-primary hover:text-secondary'
+                          className='text-xs lg:text-sm text-primary hover:text-accent'
                           onClick={handleProjectClick}
                         >
                           {link.name}
@@ -45,7 +46,7 @@ export const Footer = ({ footerData, navLinks, currentLocale }) => {
                       ) : (
                         <Link
                           href={link.path}
-                          className='text-xs lg:text-sm text-primary hover:text-secondary'
+                          className='text-xs lg:text-sm text-primary hover:text-accent'
                         >
                           {link.name}
                         </Link>
@@ -77,7 +78,7 @@ export const Footer = ({ footerData, navLinks, currentLocale }) => {
                   <React.Fragment key={link.name}>
                     <Link
                       href={link.url}
-                      className='text-primary text-xs lg:text-sm hover:text-secondary'
+                      className='text-primary text-xs lg:text-sm hover:text-accent'
                       target='_blank'
                       rel='noopener noreferrer'
                     >
@@ -94,7 +95,7 @@ export const Footer = ({ footerData, navLinks, currentLocale }) => {
 
       <div className='w-full flex flex-col items-center border-t-[1px] border-gray-300 py-4'>
         <div className='w-full flex flex-col sm:flex-row justify-between max-w-7xl px-4 gap-4 text-center'>
-          <span className='text-sm'>© 2025 Carlamelany</span>
+          <span className='text-sm'>© {currentYear} Carlamelany</span>
           <span className='text-sm'>Created by: eMartinDev</span>
         </div>
       </div>

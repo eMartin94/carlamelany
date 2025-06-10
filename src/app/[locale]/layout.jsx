@@ -16,6 +16,9 @@ export const metadata = {
   title: 'Carla Melany | Architecture Portfolio',
   description:
     'Carla Melany is an architect with a passion for sustainable design and innovative solutions. Explore her portfolio showcasing her architectural projects and designs.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export async function generateStaticParams() {
@@ -28,7 +31,9 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <html lang={locale}>
-      <body className={`${spaceMono.className} antialiased`}>
+      <body
+        className={`${spaceMono.className} antialiased selection:bg-accent selection:text-white`}
+      >
         <Header headerData={dict.navLinks} currentLocale={locale} />
         <main className='flex flex-col items-center justify-center w-full bg-white'>
           {children}

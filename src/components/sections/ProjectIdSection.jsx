@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ProjectCard } from '../ui/ProjectCard';
 import ProjectNotFound from '@/app/[locale]/project/[id]/not-found';
+import { GalleryCarousel } from '../ui/GalleryCarousel';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +16,7 @@ export const ProjectIdSection = ({ projectData, projectId }) => {
   const detailsRef = useRef(null);
   const galleryRef = useRef([]);
   const commentsRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const projectFound = projectData.projectsList.find(
     (project) => project.slug === projectId
@@ -23,6 +25,11 @@ export const ProjectIdSection = ({ projectData, projectId }) => {
   if (!projectFound) {
     return <ProjectNotFound />;
   }
+
+  const openImage = (index) => {
+    setSelectedImage(index);
+    document.body.classList.add('overflow-hidden');
+  };
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -113,7 +120,7 @@ export const ProjectIdSection = ({ projectData, projectId }) => {
             <div className='w-full grid grid-cols-2 lg:grid-cols-[28%_38%_14%_14%] justify-between mb-6 gap-4 lg:gap-2'>
               <div>
                 <h5>{projectData.labelLocation}</h5>
-                <strong>{projectFound.location}sadsd</strong>
+                <strong>{projectFound.location}</strong>
               </div>
               <div>
                 <h5>{projectData.labelProjectPhase}</h5>
@@ -140,10 +147,19 @@ export const ProjectIdSection = ({ projectData, projectId }) => {
                   imageSrc={image}
                   showInfo={false}
                   hoverZoom={false}
+                  onClick={() => openImage(i)}
                 />
               </div>
             ))}
           </div>
+
+          {selectedImage !== null && (
+            <GalleryCarousel
+              project={projectFound}
+              selectedImage={selectedImage}
+              setSelectedImage={setSelectedImage}
+            />
+          )}
         </div>
 
         <div className='w-full pt-8' ref={commentsRef}>

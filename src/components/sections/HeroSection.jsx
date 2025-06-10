@@ -28,10 +28,10 @@ export const HeroSection = ({ heroData }) => {
         className='w-full max-w-7xl px-4 flex flex-col justify-center'
         ref={heroRef}
       >
-        <h2 className='text-3xl sm:text-5xl lg:text-6xl font-black w-full lg:w-1/2 lg:max-w-md opacity-0'>
+        <h2 className='text-3xl sm:text-5xl lg:text-6xl font-black w-full lg:w-1/2 lg:max-w-md opacity-0 leading-tight text-black'>
           {heroData.titlePage}
         </h2>
-        <p className='w-full lg:w-1/2 mt-8 lg:max-w-md opacity-0'>
+        <p className='w-full lg:w-1/2 mt-8 lg:max-w-md opacity-0 text-black'>
           {heroData.descriptionPage}
         </p>
       </div>
