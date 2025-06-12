@@ -5,9 +5,11 @@ export const useNavigation = (setIsOpen) => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const locale = pathname?.split('/')[1] || 'en';
+
   useEffect(() => {
-    if (pathname === '/projects') {
-      router.replace('/');
+    if (pathname === `/${locale}/projects`) {
+      router.replace(`/${locale}`);
     }
   }, [pathname, router]);
 
@@ -22,8 +24,8 @@ export const useNavigation = (setIsOpen) => {
       }
     };
 
-    if (pathname !== '/') {
-      await router.push('/');
+    if (pathname !== `/${locale}`) {
+      await router.push(`/${locale}`);
       setTimeout(scrollToProjects, 100);
     } else {
       scrollToProjects();

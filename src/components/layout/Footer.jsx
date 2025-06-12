@@ -13,7 +13,7 @@ export const Footer = ({ footerData, navLinks, currentLocale }) => {
       <div className='w-full flex flex-col items-center max-w-7xl justify-center pt-16 pb-20 px-4'>
         <div className='w-full flex flex-col sm:flex-row justify-between'>
           <div className='flex flex-col gap-4 w-full sm:w-1/2 mb-8 sm:mb-0'>
-            <Link href='/' className='font-bold text-2xl'>
+            <Link href={`/${currentLocale}`} className='font-bold text-2xl'>
               carlamelany
             </Link>
             <p className='w-full sm:w-3/5 text-xs lg:text-sm'>

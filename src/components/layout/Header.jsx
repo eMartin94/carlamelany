@@ -50,7 +50,11 @@ export const Header = ({ currentLocale, headerData }) => {
             : 'fixed top-0 left-auto opacity-100'
         } transition-all duration-300 ease-linear`}
       >
-        <Link href={'/'} className='font-bold text-lg' onClick={closeMenu}>
+        <Link
+          href={`/${currentLocale}`}
+          className='font-bold text-lg'
+          onClick={closeMenu}
+        >
           carlamelany
         </Link>
 
